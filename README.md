@@ -17,7 +17,7 @@
 #### Run this command whenever you open a new Terminal window/tab to activate the environment.
 ```source ~/tflite/bin/activate```
 
-#### Clone the repository with the TFLite Raspberry Pi models and pathing code.
+#### Clone the repository with the TFLite Raspberry Pi models and pathing code (test data not included).
 ```git clone https://github.com/Kickblip/delivery-robot```
 
 ```cd delivery-robot```
