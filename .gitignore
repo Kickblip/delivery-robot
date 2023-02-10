@@ -1,0 +1,3 @@
+efficientdet_lite0.tflite
+efficientdet_lite0_edgetpu.tflite
+__pycache__
