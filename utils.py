@@ -21,7 +21,7 @@ _MARGIN = 10  # pixels
 _ROW_SIZE = 10  # pixels
 _FONT_SIZE = 1
 _FONT_THICKNESS = 1
-_TEXT_COLOR = (0, 0, 255)  # red
+_TEXT_COLOR = (48, 219, 117)  # green-ish color
 
 
 def visualize(
