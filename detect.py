@@ -86,27 +86,12 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     image = utils.visualize(image, detection_result)
 
     # iterate through detectionresult and check if there is a category_name = 'person'
-
-
     for detection in detection_result.detections:
       if detection.categories[0].category_name == 'person':
-        print('person detected')
-
-    # if len(detection_result.detections) > 0:
-    #   if detection_result.detections[0].categories[0].category_name == 'person':
-    #     print('person detected')
-    # print(detection_result.detections[0].categories[0].category_name)
+        print(f'person detected - score: {detection.categories[0].score}')
 
 
-
-    """
-    DetectionResult(
-      detections=[Detection(bounding_box=BoundingBox(origin_x=-3, origin_y=226, width=648, height=247), 
-      categories=[Category(index=64, score=0.43359375, display_name='', category_name='bed')])]
-      
-      )
-
-    """
+        
 
     # Calculate the FPS
     if counter % fps_avg_frame_count == 0:
