@@ -88,14 +88,13 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     # iterate through detectionresult and check if there is a category_name = 'person'
 
 
-    # for detection in detection_result.detections:
-    #   if detection.categories[0].category_name == 'person':
-    #     print('person detected')
-    #     break
-
-    if len(detection_result.detections) > 0:
-      if detection_result.detections[0].categories[0].category_name == 'person':
+    for detection in detection_result.detections:
+      if detection.categories[0].category_name == 'person':
         print('person detected')
+
+    # if len(detection_result.detections) > 0:
+    #   if detection_result.detections[0].categories[0].category_name == 'person':
+    #     print('person detected')
     # print(detection_result.detections[0].categories[0].category_name)
 
 
