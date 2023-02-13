@@ -22,6 +22,10 @@
 
 ```cd delivery-robot```
 
+#### Note: to pull changes from github repo use
+
+```git pull origin main``` in ```~/delivery-robot```
+
 #### Install required dependencies
 ```sh setup.sh```
 
