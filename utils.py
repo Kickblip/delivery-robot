@@ -56,7 +56,7 @@ def visualize(
     WITHIN_X = bbox.origin_x < x + width and bbox.origin_x + bbox.width > x
     WITHIN_Y = bbox.origin_y < y + height and bbox.origin_y + bbox.height > y
     IS_PERSON = detection.categories[0].category_name == 'person'
-    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
+    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.4
 
     if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE):
 
@@ -64,6 +64,15 @@ def visualize(
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
       cv2.rectangle(image, start_point, end_point, _OBSTACLE_COLOR, 3)
+      # draw text
+      category = detection.categories[0]
+      category_name = category.category_name
+      probability = round(category.score, 2)
+      result_text = category_name + ' (' + str(probability) + ')'
+      text_location = (_MARGIN + bbox.origin_x,
+                      _MARGIN + _ROW_SIZE + bbox.origin_y)
+      cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
+                  _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
       # Handle the detection
       handler.handleObstacle()
 
