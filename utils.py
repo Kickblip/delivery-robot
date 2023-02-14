@@ -53,12 +53,12 @@ def visualize(
     bbox = detection.bounding_box
 
     # if the detected object is within the rectangle, draw a red rectangle and handle the detection
-    WITHIN_X = bbox.origin_x > x and bbox.origin_x < x + width
-    WITHIN_Y = bbox.origin_y > y and bbox.origin_y < y + height
-    # IS_PERSON = detection.categories[0].category_name == 'person'
-    # IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
+    WITHIN_X = bbox.origin_x < x + width and bbox.origin_x + bbox.width > x
+    WITHIN_Y = bbox.origin_y < y + height and bbox.origin_y + bbox.height > y
+    IS_PERSON = detection.categories[0].category_name == 'person'
+    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
 
-    if WITHIN_X and WITHIN_Y:
+    if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE):
 
       # draw a red rectangle around the detected object
       start_point = bbox.origin_x, bbox.origin_y
