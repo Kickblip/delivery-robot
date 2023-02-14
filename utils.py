@@ -58,7 +58,7 @@ def visualize(
     # IS_PERSON = detection.categories[0].category_name == 'person'
     # IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
 
-    if WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE:
+    if WITHIN_X and WITHIN_Y:
 
       # draw a red rectangle around the detected object
       start_point = bbox.origin_x, bbox.origin_y
