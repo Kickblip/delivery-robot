@@ -50,6 +50,8 @@ def visualize(
 
   for detection in detection_result.detections:
 
+    bbox = detection.bounding_box
+
     # if the detected object is within the rectangle, draw a red rectangle and handle the detection
     WITHIN_X = bbox.origin_x > x and bbox.origin_x < x + width
     WITHIN_Y = bbox.origin_y > y and bbox.origin_y < y + height
@@ -59,7 +61,6 @@ def visualize(
     if WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE:
 
       # draw a red rectangle around the detected object
-      bbox = detection.bounding_box
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
       cv2.rectangle(image, start_point, end_point, _OBSTACLE_COLOR, 3)
@@ -68,7 +69,6 @@ def visualize(
 
     else:
       # Draw bounding_box
-      bbox = detection.bounding_box
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
       cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
