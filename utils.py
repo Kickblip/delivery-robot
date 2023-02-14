@@ -23,7 +23,7 @@ _ROW_SIZE = 10  # pixels
 _FONT_SIZE = 1
 _FONT_THICKNESS = 1
 _TEXT_COLOR = (48, 219, 117)  # green-ish color
-_TARGET_COLOR = (255, 225, 0) # yellow
+_TARGET_COLOR = (0, 225, 255) # yellow
 _OBSTACLE_COLOR = (255, 0, 0) # red
 
 
@@ -55,8 +55,8 @@ def visualize(
     # if the detected object is within the rectangle, draw a red rectangle and handle the detection
     WITHIN_X = bbox.origin_x > x and bbox.origin_x < x + width
     WITHIN_Y = bbox.origin_y > y and bbox.origin_y < y + height
-    IS_PERSON = detection.categories[0].category_name == 'person'
-    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
+    # IS_PERSON = detection.categories[0].category_name == 'person'
+    # IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
 
     if WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE:
 
