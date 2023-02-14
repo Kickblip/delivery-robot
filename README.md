@@ -1,3 +1,6 @@
+[![detection demo](https://img.youtube.com/vi/qEqy4FFJl9o/0.jpg)](https://www.youtube.com/watch?v=qEqy4FFJl9o)
+<--- click to watch full demo
+
 ## Setting up the pi
 
 #### Update packages on your Raspberry Pi OS.
