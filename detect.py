@@ -86,9 +86,9 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     image = utils.visualize(image, detection_result)
 
     # iterate through detectionresult and check if there is a category_name = 'person'
-    for detection in detection_result.detections:
-      if detection.categories[0].category_name == 'person':
-        print(f'person detected - score: {detection.categories[0].score}')
+    # for detection in detection_result.detections:
+    #   if detection.categories[0].category_name == 'person':
+    #     print(f'person detected - score: {detection.categories[0].score}')
 
 
         

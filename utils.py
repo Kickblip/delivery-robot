@@ -16,12 +16,15 @@
 import cv2
 import numpy as np
 from tflite_support.task import processor
+import handler
 
 _MARGIN = 10  # pixels
 _ROW_SIZE = 10  # pixels
 _FONT_SIZE = 1
 _FONT_THICKNESS = 1
 _TEXT_COLOR = (48, 219, 117)  # green-ish color
+_TARGET_COLOR = (255, 225, 0) # yellow
+_OBSTACLE_COLOR = (255, 0, 0) # red
 
 
 def visualize(
@@ -37,21 +40,47 @@ def visualize(
   Returns:
     Image with bounding boxes.
   """
-  for detection in detection_result.detections:
-    # Draw bounding_box
-    bbox = detection.bounding_box
-    start_point = bbox.origin_x, bbox.origin_y
-    end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
-    cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
 
-    # Draw label and score
-    category = detection.categories[0]
-    category_name = category.category_name
-    probability = round(category.score, 2)
-    result_text = category_name + ' (' + str(probability) + ')'
-    text_location = (_MARGIN + bbox.origin_x,
-                     _MARGIN + _ROW_SIZE + bbox.origin_y)
-    cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
-                _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
+  # Define the rectangle parameters
+  x, y = 256, 0
+  width, height = 128, 480
+
+  # Draw the rectangle
+  cv2.rectangle(image, (x, y), (x + width, y + height), _TARGET_COLOR, 3)
+
+  for detection in detection_result.detections:
+
+    # if the detected object is within the rectangle, draw a red rectangle and handle the detection
+    WITHIN_X = bbox.origin_x > x and bbox.origin_x < x + width
+    WITHIN_Y = bbox.origin_y > y and bbox.origin_y < y + height
+    IS_PERSON = detection.categories[0].category_name == 'person'
+    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.5
+
+    if WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE:
+
+      # draw a red rectangle around the detected object
+      bbox = detection.bounding_box
+      start_point = bbox.origin_x, bbox.origin_y
+      end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+      cv2.rectangle(image, start_point, end_point, _OBSTACLE_COLOR, 3)
+      # Handle the detection
+      handler.handleObstacle()
+
+    else:
+      # Draw bounding_box
+      bbox = detection.bounding_box
+      start_point = bbox.origin_x, bbox.origin_y
+      end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+      cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
+
+      # Draw label and score
+      category = detection.categories[0]
+      category_name = category.category_name
+      probability = round(category.score, 2)
+      result_text = category_name + ' (' + str(probability) + ')'
+      text_location = (_MARGIN + bbox.origin_x,
+                      _MARGIN + _ROW_SIZE + bbox.origin_y)
+      cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
+                  _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
 
   return image
