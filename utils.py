@@ -41,9 +41,9 @@ def visualize(
     Image with bounding boxes.
   """
 
-  # Define the rectangle parameters
-  x, y = 256, 0
-  width, height = 128, 480
+  # Define the rectangle parameters - 640x480
+  x, y = 224, 0
+  width, height = 192, 480
 
   # Draw the rectangle
   cv2.rectangle(image, (x, y), (x + width, y + height), _TARGET_COLOR, 3)
