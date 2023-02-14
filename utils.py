@@ -24,7 +24,7 @@ _FONT_SIZE = 1
 _FONT_THICKNESS = 1
 _TEXT_COLOR = (48, 219, 117)  # green-ish color
 _TARGET_COLOR = (0, 225, 255) # yellow
-_OBSTACLE_COLOR = (255, 0, 0) # red
+_OBSTACLE_COLOR = (0, 0, 255) # red
 
 
 def visualize(
