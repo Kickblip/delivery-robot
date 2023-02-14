@@ -56,7 +56,7 @@ def visualize(
     WITHIN_X = bbox.origin_x < x + width and bbox.origin_x + bbox.width > x
     WITHIN_Y = bbox.origin_y < y + height and bbox.origin_y + bbox.height > y
     IS_PERSON = detection.categories[0].category_name == 'person'
-    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.4
+    IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.35
 
     if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE):
 
