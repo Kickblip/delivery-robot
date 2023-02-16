@@ -13,9 +13,6 @@ python3 -m pip install --user virtualenv
 # Create a Python virtual environment
 python3 -m venv ~/tflite
 
-# Run this command whenever you open a new Terminal window/tab to activate the environment.
-source ~/tflite/bin/activate
-
 # Install Python dependencies
 python3 -m pip install pip --upgrade
 python3 -m pip install -r requirements.txt
