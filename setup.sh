@@ -10,15 +10,11 @@ python3 --version
 python3 -m pip install --user --upgrade pip
 python3 -m pip install --user virtualenv
 
-# Create a Python virtual environment for the TFLite samples (optional but strongly recommended)
+# Create a Python virtual environment
 python3 -m venv ~/tflite
 
 # Run this command whenever you open a new Terminal window/tab to activate the environment.
 source ~/tflite/bin/activate
-
-# Clone the TensorFlow example repository with the TFLite Raspberry Pi samples.
-git clone https://github.com/Kickblip/delivery-robot
-cd delivery-robot
 
 # Install Python dependencies
 python3 -m pip install pip --upgrade
