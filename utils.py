@@ -57,8 +57,9 @@ def visualize(
     WITHIN_Y = bbox.origin_y < y + height and bbox.origin_y + bbox.height > y
     IS_PERSON = detection.categories[0].category_name == 'person'
     IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.35
+    IS_LARGE_AREA = bbox.width * bbox.height > 10000
 
-    if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE):
+    if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE and IS_LARGE_AREA):
 
       # draw a red rectangle around the detected object
       start_point = bbox.origin_x, bbox.origin_y
