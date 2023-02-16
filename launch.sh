@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # get most recent version of code
 git pull origin main
 
