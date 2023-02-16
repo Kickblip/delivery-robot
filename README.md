@@ -3,6 +3,18 @@
 
 ## Setting up the pi
 
+### Fast setup (or follow steps below)
+
+```git clone https://github.com/Kickblip/delivery-robot```
+
+```cd delivery-robot```
+
+```sh setup.sh```
+
+```sh launch.sh```
+
+### Manual setup
+
 #### Update packages on your Raspberry Pi OS.
 ```sudo apt-get update```
 
