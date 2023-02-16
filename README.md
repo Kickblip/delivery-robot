@@ -3,7 +3,7 @@
 
 ## Setting up the pi
 
-### Fast setup (or follow steps below)
+### Fast setup
 
 ```git clone https://github.com/Kickblip/delivery-robot```
 
