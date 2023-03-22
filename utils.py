@@ -26,9 +26,6 @@ _TEXT_COLOR = (48, 219, 117)  # green-ish color
 _TARGET_COLOR = (0, 225, 255) # yellow
 _OBSTACLE_COLOR = (0, 0, 255) # red
 
-runHandler = True
-obstacleHandle = True
-
 
 
 def visualize(
@@ -79,14 +76,8 @@ def visualize(
       cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                   _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
       
-    if (runHandler):
-      runHandler = False
-      obstacleHandle = False
-      # Handle the detection
-      obstacleHandle = handler.handleObstacle(detection)
-
-    if obstacleHandle:
-        runHandler = True
+    # Handle the detection
+      handler.handleObstacle(detection)
 
 
     else:

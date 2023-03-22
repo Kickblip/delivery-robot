@@ -10,11 +10,9 @@ def handleObstacle (detection):
     GPIO.output(17,GPIO.HIGH)
 
     time.sleep(3)
-    
+
     print("LED off")
     GPIO.output(17,GPIO.LOW)
-
-    return True
 
         
 
