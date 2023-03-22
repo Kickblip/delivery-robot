@@ -26,6 +26,8 @@ _TEXT_COLOR = (48, 219, 117)  # green-ish color
 _TARGET_COLOR = (0, 225, 255) # yellow
 _OBSTACLE_COLOR = (0, 0, 255) # red
 
+objectDetected = False
+
 
 
 def visualize(
@@ -76,11 +78,12 @@ def visualize(
       cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                   _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
       
-    # Handle the detection
-      handler.handleObstacle(detection)
+      objectDetected = True
 
 
     else:
+      objectDetected = False
+
       # Draw bounding_box
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
@@ -95,5 +98,8 @@ def visualize(
                       _MARGIN + _ROW_SIZE + bbox.origin_y)
       cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                   _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
+      
+    # Handle the detection
+    handler.handleObstacle(objectDetected)
 
   return image

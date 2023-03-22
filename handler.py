@@ -2,17 +2,24 @@ import time
 import RPi.GPIO as GPIO
 
 
-def handleObstacle (detection):
-    print(f"obstacle detected - score: {detection.categories[0].score}")
+def handleObstacle (objectDetected):
 
-    # GPIO.output(17, GPIO.HIGH)
-    print("LED on")
-    GPIO.output(17,GPIO.HIGH)
+    if objectDetected == True:
+        GPIO.output(17,GPIO.HIGH)
+    else:
+        GPIO.output(17,GPIO.LOW)
 
-    time.sleep(3)
 
-    print("LED off")
-    GPIO.output(17,GPIO.LOW)
+    # print(f"obstacle detected - score: {detection.categories[0].score}")
+
+    # # GPIO.output(17, GPIO.HIGH)
+    # print("LED on")
+    # GPIO.output(17,GPIO.HIGH)
+
+    # time.sleep(3)
+
+    # print("LED off")
+    # GPIO.output(17,GPIO.LOW)
 
         
 
