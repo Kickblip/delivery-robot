@@ -5,8 +5,10 @@ import RPi.GPIO as GPIO
 def handleObstacle (objectDetected):
 
     if objectDetected == True:
+        print("obstacle detected")
         GPIO.output(17,GPIO.HIGH)
     else:
+        print("no obstacle detected")
         GPIO.output(17,GPIO.LOW)
 
 
