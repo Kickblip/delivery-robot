@@ -17,6 +17,7 @@ import cv2
 import numpy as np
 from tflite_support.task import processor
 import handler
+import RPi.GPIO as GPIO
 
 _MARGIN = 10  # pixels
 _ROW_SIZE = 10  # pixels
@@ -79,10 +80,14 @@ def visualize(
                   _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
       
       objectDetected = True
+      print("obstacle detected")
+      GPIO.output(17,GPIO.HIGH)
 
 
     else:
       objectDetected = False
+      print("no obstacle detected")
+      GPIO.output(17,GPIO.LOW)
 
       # Draw bounding_box
       start_point = bbox.origin_x, bbox.origin_y
@@ -100,6 +105,6 @@ def visualize(
                   _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
       
     # Handle the detection
-    handler.handleObstacle(objectDetected)
+    # handler.handleObstacle(objectDetected)
 
   return image
