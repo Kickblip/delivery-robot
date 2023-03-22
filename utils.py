@@ -83,8 +83,7 @@ def visualize(
 
 
     else:
-      objectDetected = False
-
+      
       # Draw bounding_box
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
@@ -107,10 +106,11 @@ def visualize(
     if (len(detection_result.detections) == 0):
       objectDetected = False
       
-      
+
   if (objectDetected == True):
     print("obstacle detected")
     GPIO.output(17,GPIO.HIGH)
+
   else:
     print("no obstacle detected")
     GPIO.output(17,GPIO.LOW)
