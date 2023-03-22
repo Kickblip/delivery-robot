@@ -8,7 +8,7 @@ def handleObstacle (detection):
 
 
 
-    GPIO.output(17, GPIO.LOW)
+    GPIO.output(17, GPIO.HIGH)
 
     # physical pin 11 - signal - GPIO 18
     # ground 6
