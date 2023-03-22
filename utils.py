@@ -80,14 +80,15 @@ def visualize(
                   _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
       
       objectDetected = True
-      print("obstacle detected")
-      GPIO.output(17,GPIO.HIGH)
+    #   print("obstacle detected")
+    #   GPIO.output(17,GPIO.HIGH)
+
 
 
     else:
       objectDetected = False
-      print("no obstacle detected")
-      GPIO.output(17,GPIO.LOW)
+    #   print("no obstacle detected")
+    #   GPIO.output(17,GPIO.LOW)
 
       # Draw bounding_box
       start_point = bbox.origin_x, bbox.origin_y
@@ -107,4 +108,6 @@ def visualize(
     # Handle the detection
     # handler.handleObstacle(objectDetected)
 
+
+    print(objectDetected)
   return image
