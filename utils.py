@@ -27,7 +27,7 @@ _TEXT_COLOR = (48, 219, 117)  # green-ish color
 _TARGET_COLOR = (0, 225, 255) # yellow
 _OBSTACLE_COLOR = (0, 0, 255) # red
 
-
+objectDetected = False
 
 def visualize(
     image: np.ndarray,
@@ -43,7 +43,6 @@ def visualize(
     Image with bounding boxes.
   """
 
-  objectDetected = False
 
   # Define the rectangle parameters - 640x480
   x, y = 224, 0
