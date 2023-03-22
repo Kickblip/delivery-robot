@@ -64,6 +64,8 @@ def visualize(
     IS_LARGE_AREA = bbox.width * bbox.height > 10000
 
     if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE and IS_LARGE_AREA):
+      
+      objectDetected = True
 
       # draw a red rectangle around the detected object
       start_point = bbox.origin_x, bbox.origin_y
@@ -79,16 +81,13 @@ def visualize(
       cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                   _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
       
-      objectDetected = True
-    #   print("obstacle detected")
-    #   GPIO.output(17,GPIO.HIGH)
+
+
 
 
 
     else:
       objectDetected = False
-    #   print("no obstacle detected")
-    #   GPIO.output(17,GPIO.LOW)
 
       # Draw bounding_box
       start_point = bbox.origin_x, bbox.origin_y
@@ -109,5 +108,11 @@ def visualize(
     # handler.handleObstacle(objectDetected)
 
 
-    print(objectDetected)
+  if (objectDetected == True):
+    print("obstacle detected")
+    GPIO.output(17,GPIO.HIGH)
+  else:
+    print("no obstacle detected")
+    GPIO.output(17,GPIO.LOW)
+
   return image
