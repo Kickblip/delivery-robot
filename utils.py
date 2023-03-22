@@ -1,22 +1,8 @@
-# Copyright 2021 The TensorFlow Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 """Utility functions to display the pose detection results."""
 
 import cv2
 import numpy as np
 from tflite_support.task import processor
-import handler
 import RPi.GPIO as GPIO
 
 _MARGIN = 10  # pixels
@@ -44,7 +30,7 @@ def visualize(
 
   objectDetected = None;
   
-  # Define the rectangle parameters - 640x480
+  # Define the hotzone rectangle parameters - 640x480
   x, y = 224, 0
   width, height = 192, 480
 
@@ -98,9 +84,7 @@ def visualize(
                       _MARGIN + _ROW_SIZE + bbox.origin_y)
       cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                   _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
-      
-    # Handle the detection
-    # handler.handleObstacle(objectDetected)
+
 
     # if there are no values in the detection_result, then there is no obstacle
     if (len(detection_result.detections) == 0):

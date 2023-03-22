@@ -1,16 +1,3 @@
-# Copyright 2021 The TensorFlow Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
 """Main script to run the object detection routine."""
 import argparse
 import sys
@@ -22,7 +9,11 @@ from tflite_support.task import processor
 from tflite_support.task import vision
 import RPi.GPIO as GPIO
 import utils
-import handler
+
+    # TODO:
+    # 1. remove non-human objects from detection
+    # 2. make frames push to a webserver
+    # 3. set up webserver to display frames
 
 
 def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
@@ -38,10 +29,9 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     enable_edgetpu: True/False whether the model is a EdgeTPU model.
   """
 
-#   GPIO.setmode(GPIO.BOARD)
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(17, GPIO.OUT)
-#   GPIO.output(18, GPIO.LOW)
+
 
   # Variables to calculate FPS
   counter, fps = 0, 0
@@ -89,14 +79,8 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     # Run object detection estimation using the model.
     detection_result = detector.detect(input_tensor)
 
-    # Draw keypoints and edges on input image
-    image = utils.visualize(image, detection_result)
-
-    # iterate through detectionresult and check if there is a category_name = 'person'
-    # for detection in detection_result.detections:
-    #   if detection.categories[0].category_name == 'person':
-    #     print(f'person detected - score: {detection.categories[0].score}')
-    
+    # Draw keypoints and edges on input image - also where humans are detected
+    image = utils.visualize(image, detection_result)    
 
     # Calculate the FPS
     if counter % fps_avg_frame_count == 0:
@@ -109,8 +93,6 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     text_location = (left_margin, row_size)
     cv2.putText(image, fps_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                 font_size, text_color, font_thickness)
-    
-    # handler.pushFrame(image)
 
     # Stop the program if the ESC key is pressed.
     if cv2.waitKey(1) == 27:
