@@ -20,7 +20,9 @@ import cv2
 from tflite_support.task import core
 from tflite_support.task import processor
 from tflite_support.task import vision
+import RPi.GPIO as GPIO
 import utils
+import handler
 
 
 def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
@@ -35,6 +37,11 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     num_threads: The number of CPU threads to run the model.
     enable_edgetpu: True/False whether the model is a EdgeTPU model.
   """
+
+#   GPIO.setmode(GPIO.BOARD)
+  GPIO.setmode(GPIO.BCM)
+  GPIO.setup(18, GPIO.OUT)
+#   GPIO.output(18, GPIO.LOW)
 
   # Variables to calculate FPS
   counter, fps = 0, 0
@@ -89,9 +96,7 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     # for detection in detection_result.detections:
     #   if detection.categories[0].category_name == 'person':
     #     print(f'person detected - score: {detection.categories[0].score}')
-
-
-        
+    
 
     # Calculate the FPS
     if counter % fps_avg_frame_count == 0:
@@ -104,6 +109,8 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     text_location = (left_margin, row_size)
     cv2.putText(image, fps_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                 font_size, text_color, font_thickness)
+    
+    handler.pushFrame(image)
 
     # Stop the program if the ESC key is pressed.
     if cv2.waitKey(1) == 27:

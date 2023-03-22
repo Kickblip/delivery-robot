@@ -5,8 +5,15 @@ def handleObstacle (detection):
     print(f"obstacle detected - score: {detection.categories[0].score}")
 
 
-    
-    # # set the raspberry pi GPIO pin to high
-    # GPIO.output(18, GPIO.HIGH)
-    # # wait 5 seconds
-    # time.sleep(5)
+
+
+
+    GPIO.output(18, GPIO.LOW)
+
+    # physical pin 11 - signal - GPIO 18
+    # ground 6
+    # 5V power 2
+
+def pushFrame ():
+    # push the frame to a live webserver
+    print("pushing frame but not really because this is just a test function :D")
