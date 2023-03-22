@@ -27,7 +27,6 @@ _TEXT_COLOR = (48, 219, 117)  # green-ish color
 _TARGET_COLOR = (0, 225, 255) # yellow
 _OBSTACLE_COLOR = (0, 0, 255) # red
 
-objectDetected = False
 
 def visualize(
     image: np.ndarray,
@@ -43,7 +42,8 @@ def visualize(
     Image with bounding boxes.
   """
 
-
+  objectDetected = None;
+  
   # Define the rectangle parameters - 640x480
   x, y = 224, 0
   width, height = 192, 480
@@ -79,9 +79,6 @@ def visualize(
                       _MARGIN + _ROW_SIZE + bbox.origin_y)
       cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
                   _FONT_SIZE, _OBSTACLE_COLOR, _FONT_THICKNESS)
-      
-
-
 
 
 
@@ -106,7 +103,11 @@ def visualize(
     # Handle the detection
     # handler.handleObstacle(objectDetected)
 
-
+    # if there are no values in the detection_result, then there is no obstacle
+    if (len(detection_result.detections) == 0):
+      objectDetected = False
+      
+      
   if (objectDetected == True):
     print("obstacle detected")
     GPIO.output(17,GPIO.HIGH)
