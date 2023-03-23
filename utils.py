@@ -68,22 +68,22 @@ def visualize(
 
 
 
-    else:
+    # else:
       
-      # Draw bounding_box
-      start_point = bbox.origin_x, bbox.origin_y
-      end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
-      cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
+    #   # Draw bounding_box
+    #   start_point = bbox.origin_x, bbox.origin_y
+    #   end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
+    #   cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
 
-      # Draw label and score
-      category = detection.categories[0]
-      category_name = category.category_name
-      probability = round(category.score, 2)
-      result_text = category_name + ' (' + str(probability) + ')'
-      text_location = (_MARGIN + bbox.origin_x,
-                      _MARGIN + _ROW_SIZE + bbox.origin_y)
-      cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
-                  _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
+    #   # Draw label and score
+    #   category = detection.categories[0]
+    #   category_name = category.category_name
+    #   probability = round(category.score, 2)
+    #   result_text = category_name + ' (' + str(probability) + ')'
+    #   text_location = (_MARGIN + bbox.origin_x,
+    #                   _MARGIN + _ROW_SIZE + bbox.origin_y)
+    #   cv2.putText(image, result_text, text_location, cv2.FONT_HERSHEY_PLAIN,
+    #               _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
 
 
     # if there are no values in the detection_result, then there is no obstacle
