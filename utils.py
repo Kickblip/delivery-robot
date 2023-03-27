@@ -33,7 +33,8 @@ def visualize(
   # Define the hotzone rectangle parameters - 640x480
 
   dx = 96
-  x, y = 224, 0
+  x = 320 - dx
+  y = 0
   width, height = dx*2, 480
 
   # Draw the rectangle
