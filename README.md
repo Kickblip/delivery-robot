@@ -1,5 +1,5 @@
-[![detection demo](https://img.youtube.com/vi/qEqy4FFJl9o/0.jpg)](https://www.youtube.com/watch?v=qEqy4FFJl9o)
-**<--- click img to watch full demo**
+[![detection demo](https://img.youtube.com/vi/rr4ijy2yDrk/0.jpg)](https://www.youtube.com/watch?v=rr4ijy2yDrk)
+**<--- click img to watch the latest demo**
 
 
 
