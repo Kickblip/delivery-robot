@@ -10,11 +10,6 @@ from tflite_support.task import vision
 import RPi.GPIO as GPIO
 import utils
 
-    # TODO:
-    # 1. remove non-human objects from detection
-    # 2. make frames push to a webserver
-    # 3. set up webserver to display frames
-
 
 def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
         enable_edgetpu: bool) -> None:
@@ -29,7 +24,13 @@ def run(model: str, camera_id: int, width: int, height: int, num_threads: int,
     enable_edgetpu: True/False whether the model is a EdgeTPU model.
   """
 
+
+    # BCM mode is used to address the GPIOs by their "Broadcom SOC channel" number
+    # BOARD mode is used to address the GPIOs by their physical location on the pi
+    # https://pinout.xyz/ <--- for more info
+    
   GPIO.setmode(GPIO.BCM)
+    # Initialize the GPIO pin
   GPIO.setup(17, GPIO.OUT)
 
 

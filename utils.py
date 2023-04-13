@@ -30,42 +30,42 @@ def visualize(
 
   objectDetected = None;
   
-  # Define the hotzone rectangle parameters - 640x480
-
+  # Defining the dimensions of the hotzone - 640x480
   dx = 64 
   x = 320 - dx
   y = 0
   width, height = dx*2, 480
 
-  # Draw the rectangle
+  # Draw the hotzone rectangle in yellow
   cv2.rectangle(image, (x, y), (x + width, y + height), _TARGET_COLOR, 3)
 
   for detection in detection_result.detections:
 
-    # if the detection is not a human, skip it
+    # If the detection is not a human, skip it
     if (detection.categories[0].category_name != 'person'):
         continue
     
 
-
+    # X and Y coordinates of the bounding box
     bbox = detection.bounding_box
 
-    # if the detected object is within the rectangle, draw a red rectangle and handle the detection
+    # Parameters to determine if the rover should stop
     WITHIN_X = bbox.origin_x < x + width and bbox.origin_x + bbox.width > x
     WITHIN_Y = bbox.origin_y < y + height and bbox.origin_y + bbox.height > y
     IS_PERSON = detection.categories[0].category_name == 'person'
     IS_HIGH_CONFIDENCE = detection.categories[0].score > 0.35
     IS_LARGE_AREA = bbox.width * bbox.height > 10000
 
+    # If the detection meets all the above parameters, set the objectDetected flag to true
     if (WITHIN_X and WITHIN_Y and IS_PERSON and IS_HIGH_CONFIDENCE and IS_LARGE_AREA):
       
       objectDetected = True
 
-      # draw a red rectangle around the detected object
+      # Draw a red rectangle around detected people
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
       cv2.rectangle(image, start_point, end_point, _OBSTACLE_COLOR, 3)
-      # draw text
+      # Draw some text too
       category = detection.categories[0]
       category_name = category.category_name
       probability = round(category.score, 2)
@@ -79,12 +79,12 @@ def visualize(
 
     else:
       
-      # Draw bounding_box
+      # People who aren't in the hotzone get green rectangles
       start_point = bbox.origin_x, bbox.origin_y
       end_point = bbox.origin_x + bbox.width, bbox.origin_y + bbox.height
       cv2.rectangle(image, start_point, end_point, _TEXT_COLOR, 3)
 
-      # Draw label and score
+      # They also get text and scores
       category = detection.categories[0]
       category_name = category.category_name
       probability = round(category.score, 2)
@@ -95,17 +95,22 @@ def visualize(
                   _FONT_SIZE, _TEXT_COLOR, _FONT_THICKNESS)
 
 
-    # if there are no values in the detection_result, then there is no obstacle
+    # If there are no values in the detection_result, then there is no obstacle
     if (len(detection_result.detections) == 0):
       objectDetected = False
       
 
   if (objectDetected == True):
+    # Check the flag and set the GPIO pin to high if there is an obstacle
+    # GPIO 17 is a signal pin that connects to the relay switch
     print("obstacle detected")
     GPIO.output(17,GPIO.HIGH)
 
   else:
+    # If the flag is false, then there is no obstacle
+    # If there is no obstacle, then the GPIO pin is set to low
     print("no obstacle detected")
     GPIO.output(17,GPIO.LOW)
 
+# Return the image with the bounding boxes
   return image
