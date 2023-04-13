@@ -103,13 +103,11 @@ def visualize(
   if (objectDetected == True):
     # Check the flag and set the GPIO pin to high if there is an obstacle
     # GPIO 17 is a signal pin that connects to the relay switch
-    print("obstacle detected")
     GPIO.output(17,GPIO.HIGH)
 
   else:
     # If the flag is false, then there is no obstacle
     # If there is no obstacle, then the GPIO pin is set to low
-    print("no obstacle detected")
     GPIO.output(17,GPIO.LOW)
 
 # Return the image with the bounding boxes
